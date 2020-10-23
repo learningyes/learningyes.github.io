@@ -33,8 +33,9 @@ var Button = function(x, y, pressed) {
     this.pressed = pressed;
 };
 
-Button.prototype.draw = function() {
-    if(this.pressed) {
+Button.prototype.draw = function(redness) {
+    stroke(redness, 0, 0);
+	if(this.pressed) {
         fill(74, 95, 179);
     } else {
         fill(255, 255, 255);
@@ -67,6 +68,7 @@ var COLUMN_HEIGHT = 5;
 var NUMBER_COLUMNS = 2;
 var buttons = [];
 var resultbuttons = [];
+angleMode = "degrees";
 
 for(var j=0; j < NUMBER_COLUMNS; j++) {
     for(var i=0; i < COLUMN_HEIGHT; i++) {
@@ -110,7 +112,7 @@ draw = function() {
     
     // Draw all buttons
     for(var i=0; i < buttons.length; i++) {
-        buttons[i].draw();
+        buttons[i].draw(floor(128 + 127 * sin(frameCount%360)));
         resultbuttons[i].draw();
     }
     
