@@ -21,7 +21,7 @@ https://github.com/Team-Code/KA_Offline -->
     var sketchProc = function(processingInstance) {
      with (processingInstance) {
         size(400, 400); 
-        frameRate(30);
+        frameRate(10); //30
         
         // ProgramCodeGoesHere
 	
@@ -55,6 +55,7 @@ var Resultbutton = function(x, y, pressed) {
 };
 
 Resultbutton.prototype.draw = function() {
+    stroke(0, 0, 0);
     if(this.pressed) {
         fill(74, 95, 179);
     } else {
