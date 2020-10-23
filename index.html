@@ -21,7 +21,7 @@ https://github.com/Team-Code/KA_Offline -->
     var sketchProc = function(processingInstance) {
      with (processingInstance) {
         size(400, 400); 
-        frameRate(10); //30
+        frameRate(30);
         
         // ProgramCodeGoesHere
 	
@@ -113,7 +113,7 @@ draw = function() {
     
     // Draw all buttons
     for(var i=0; i < buttons.length; i++) {
-        buttons[i].draw(floor(128 + 127 * sin(frameCount%360)));
+        buttons[i].draw(floor(128 + 127 * sin(frameCount%3600 / 10)));
         resultbuttons[i].draw();
     }
     
