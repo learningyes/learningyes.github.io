@@ -103,11 +103,13 @@ mouseClicked = function() {
             }
         }
     }
-        // Counting pressed buttons
-	sum1 = 0;
-        if(buttonsRow1[i].pressed) {
-            sum1++;
-        }   
+    // Counting pressed buttons
+    sum1 = 0;
+    for (var i = 0; i < buttonsRow1.length; i++) {
+	if(buttonsRow1[i].pressed) {
+           sum1++;
+    	}
+    }
     
     for (var i = 0; i < buttonsRow2.length; i++) {
         if (buttonsRow2[i].isUnderMouse(mouseX, mouseY)) {
@@ -118,11 +120,13 @@ mouseClicked = function() {
             }
         }
     }
-        // Counting pressed buttons
-	sum2 = 0;
-        if(buttonsRow2[i].pressed) {
-            sum2++;
-        }   
+    // Counting pressed buttons
+    sum2 = 0;
+    for (var i = 0; i < buttonsRow1.length; i++) {
+	if(buttonsRow1[i].pressed) {
+           sum1++;
+    	}
+    }   
 };
 
 draw = function() {
