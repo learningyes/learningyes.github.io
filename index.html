@@ -94,8 +94,6 @@ var sum1 = 0;
 var sum2 = 0;
 
 mouseClicked = function() {
-    sum1 = 0;
-    sum2 = 0;
     for (var i = 0; i < buttonsRow1.length; i++) {
         if (buttonsRow1[i].isUnderMouse(mouseX, mouseY)) {
             if (buttonsRow1[i].pressed) {
@@ -104,11 +102,13 @@ mouseClicked = function() {
                 buttonsRow1[i].pressed = true;
             }
         }
+    }
         // Counting pressed buttons
+	sum1 = 0;
         if(buttonsRow1[i].pressed) {
             sum1++;
         }   
-    }
+    
     for (var i = 0; i < buttonsRow2.length; i++) {
         if (buttonsRow2[i].isUnderMouse(mouseX, mouseY)) {
             if (buttonsRow2[i].pressed) {
@@ -117,11 +117,12 @@ mouseClicked = function() {
                 buttonsRow2[i].pressed = true;
             }
         }
+    }
         // Counting pressed buttons
+	sum2 = 0;
         if(buttonsRow2[i].pressed) {
             sum2++;
         }   
-    }
 };
 
 draw = function() {
@@ -148,7 +149,7 @@ draw = function() {
     
     fill(0, 0, 0);
     textSize(50);
-    text(sum, 270, 100);
+    text(sum1+sum2, 270, 100);
     text("+", 87, 270);
     text("=", 187, 270);
 };
