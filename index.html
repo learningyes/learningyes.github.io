@@ -27,7 +27,7 @@ https://github.com/Team-Code/KA_Offline -->
         
         // ProgramCodeGoesHere
 	
-	     // buttons
+// buttons
 
 var Button = function(x, y, pressed) {
     this.x = x;
@@ -70,33 +70,57 @@ Resultbutton.prototype.draw = function() {
 var COLUMN_HEIGHT = 5;
 var NUMBER_COLUMNS = 2;
 var buttons = [];
+var buttonsRow1 = [];
+var buttonsRow2 = [];	     
 var resultbuttons = [];
 angleMode = "degrees";
 
-for(var j=0; j < NUMBER_COLUMNS; j++) {
+// Make buttons
+	     
+for(var i=0; i < COLUMN_HEIGHT; i++) {
+	buttonsRow1.push(new Button(50, 150 + i * 50, false));
+	buttonsRow2.push(new Button(150, 150 + i * 50, false));
+}
+	     
+// Make resultbuttons
+	    
+for(var j=0; j < 2; j++) {
     for(var i=0; i < COLUMN_HEIGHT; i++) {
-        buttons.push(new Button(50 + j * 100, 150 + i * 50, false));
         resultbuttons.push(new Resultbutton(240 + j * 50, 330 - i * 50, false));
     }
 }
 
-var sum = 0;
+var sum1 = 0;
+var sum2 = 0;
 
 mouseClicked = function() {
-    sum = 0;
-    for (var i = 0; i < buttons.length; i++) {
-        if (buttons[i].isUnderMouse(mouseX, mouseY)) {
-            if (buttons[i].pressed) {
-                buttons[i].pressed = false;
+    sum1 = 0;
+    sum2 = 0;
+    for (var i = 0; i < buttonsRow1.length; i++) {
+        if (buttonsRow1[i].isUnderMouse(mouseX, mouseY)) {
+            if (buttonsRow1[i].pressed) {
+                buttonsRow1[i].pressed = false;
             } else {
-                buttons[i].pressed = true;
+                buttonsRow1[i].pressed = true;
             }
         }
         // Counting pressed buttons
-        if(buttons[i].pressed) {
-            sum++;
+        if(buttonsRow1[i].pressed) {
+            sum1++;
+        }   
+    }
+    for (var i = 0; i < buttonsRow2.length; i++) {
+        if (buttonsRow2[i].isUnderMouse(mouseX, mouseY)) {
+            if (buttonsRow2[i].pressed) {
+                buttonsRow2[i].pressed = false;
+            } else {
+                buttonsRow2[i].pressed = true;
+            }
         }
-        
+        // Counting pressed buttons
+        if(buttonsRow2[i].pressed) {
+            sum2++;
+        }   
     }
 };
 
@@ -109,13 +133,16 @@ draw = function() {
     }
     
     // Colouring of resultbuttons
-    for(var i=0; i < sum; i++) {
+    for(var i=0; i < sum1+ sum2; i++) {
         resultbuttons[i].pressed = true;
     }
     
     // Draw all buttons
-    for(var i=0; i < buttons.length; i++) {
-        buttons[i].draw(floor(128 + 127 * sin(frameCount%3600 / 10)));
+    for(var i=0; i < buttonsRow1.length; i++) {
+        buttonsRow1[i].draw(floor(128 + 127 * sin(frameCount%3600 / 10)));
+        buttonsRow2[i].draw(floor(128 + 127 * sin(frameCount%3600 / 10)));
+    }
+    for(var i=0; i < resultbuttons.length; i++) {
         resultbuttons[i].draw();
     }
     
