@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- This is based on DillingerLee's great template here:
+https://github.com/Team-Code/KA_Offline -->
+<html> 
+ <head>
+    <title>Multiplication 01</title> 
+</head>
+ <body>
+    <p align="center"> 
+	<!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+ <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+	 
+	
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(30);
+        
+        // ProgramCodeGoesHere
+
+// buttons
+
+var Button = function(x, y, pressed) {
+    this.x = x;
+    this.y = y;
+    this.pressed = pressed;
+};
+
+Button.prototype.draw = function() {
+    if(this.pressed) {
+        fill(74, 95, 179);
+    } else {
+        fill(255, 255, 255);
+    }
+    strokeWeight(2);
+    ellipse(this.x, this.y, 40, 40);
+};
+
+Button.prototype.isUnderMouse = function(x, y) {
+    return (sq(x - this.x) + sq(y - this.y)) < sq(20);
+};
+
+var Resultbutton = function(x, y, pressed) {
+    this.x = x;
+    this.y = y;
+    this.pressed = pressed;
+};
+
+Resultbutton.prototype.draw = function() {
+    if(this.pressed) {
+        fill(74, 95, 179);
+    } else {
+        fill(255, 255, 255);
+    }
+    strokeWeight(2);
+    rect(this.x, this.y, 40, 40, 10);
+};
+
+var COLUMN_HEIGHT = 5;
+var NUMBER_COLUMNS = 2;
+var buttons = [];
+var resultbuttons = [];
+
+for(var j=0; j < NUMBER_COLUMNS; j++) {
+    for(var i=0; i < COLUMN_HEIGHT; i++) {
+        /* buttons.push(new Button(50 + j * 100, 150 + i * 50, false)); */
+        resultbuttons.push(new Resultbutton(240 + j * 50, 330 - i * 50, false));
+    }
+}
+
+var sum = 0;
+var input = [];
+var inputDigit = 0;
+var completeInput = 0;
+var number1;
+var number2;
+var MAX_NUMBER = 6;
+var points = 0;
+var answer = true;
+var previousAnswer;
+
+var newNumbers = function() {
+    number1 = floor(random(1, MAX_NUMBER));    
+    number2 = floor(random(1, MAX_NUMBER));
+    input = [0,0];
+};
+
+newNumbers();
+
+keyTyped = function() {
+    answer = true;
+    if(key>=48 && key<=57) {
+        input[1] = input[0];
+        input[0] = key - 48;
+    } else if (key.code===10) {
+        completeInput = input[0] + 10 * input[1];
+        if(completeInput === number1 * number2) {
+            points++;
+        } else {
+            points--;
+            answer = false;
+            previousAnswer = number1 * number2;
+        }
+        points = constrain(points,0,10);
+        newNumbers();
+    }
+};
+
+draw = function() {
+    background(255, 255, 255);
+    
+    // 
+    for(var i=0; i < resultbuttons.length; i++) {
+        resultbuttons[i].pressed = false;
+    }
+    // Colouring of resultbuttons
+    for(var i=0; i < points; i++) {
+        resultbuttons[i].pressed = true;
+    }
+    // Draw all buttons
+    for(var i=0; i < resultbuttons.length; i++) {
+        resultbuttons[i].draw();
+    }
+    
+    fill(0, 0, 0);
+    textSize(50);
+    text(number1 + " x " + number2 + " =  " + input[1] + input[0], 40, 55);
+    noFill();
+    rect(210, 10, 75, 55);
+    if(points >= 10) {
+        fill(50, 171, 34);
+        text("CONGRATS!",40,120);
+    } else if (!answer) {
+        fill(245, 22, 48);
+        text(previousAnswer + " ?!?",290, 55);
+    }
+};
+		
+}};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc);
+	 
+ </script>
+
+</html>
