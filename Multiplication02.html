@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- This is based on DillingerLee's great template here:
+https://github.com/Team-Code/KA_Offline -->
+<html> 
+ <head>
+    <title>Multiplication 01</title> 
+</head>
+ <body>
+    <p align="center"> 
+	<!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+ <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+	 
+	
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(30);
+        
+        // ProgramCodeGoesHere
+
+var MAX_RESULT = 10;
+var MAX_NUMBER = 10;
+var buttons = [];
+var resultbuttons = [];
+var number1;
+var number2;
+var points = 0;
+var previousAnswer;
+
+// Define buttons
+
+var Button = function(x, y, value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+};
+
+Button.prototype.draw = function() {
+    fill(255, 255, 255);
+    strokeWeight(2);
+    ellipse(this.x, this.y, 26, 26);
+    fill(0, 0, 0);
+    textSize(12);
+    textAlign(CENTER, CENTER);
+    text(this.value, this.x, this.y);
+};
+
+Button.prototype.isUnderMouse = function(x, y) {
+    return (sq(x - this.x) + sq(y - this.y)) < sq(13);
+};
+
+// Define resultbuttons
+
+var Resultbutton = function(x, y) {
+    this.x = x;
+    this.y = y;
+};
+
+Resultbutton.prototype.draw = function(coloured) {
+    if(coloured) {
+        fill(74, 95, 179);
+    } else {
+        fill(255, 255, 255);
+    }
+    strokeWeight(2);
+    rect(this.x, this.y, 25, 25, 7);
+};
+
+var drawAllResultButtons = function(points) {
+    for(var i=0; i < points; i++) {
+        resultbuttons[i].draw(true);
+    }
+    for(var i=points; i < resultbuttons.length; i++) {
+        resultbuttons[i].draw(false);
+    }
+};
+
+// Function setting random numbers to calculate
+var newNumbers = function() {
+    number1 = floor(random(1, MAX_NUMBER));    
+    number2 = floor(random(1, MAX_NUMBER));
+};
+
+// Prepare buttons
+for(var h=1; h <= MAX_NUMBER; h++) {
+    for(var v=1; v <= MAX_NUMBER; v++) {
+        buttons.push(new Button(h*30, 63 + v*30, h*v));
+    }
+}
+
+// Prepare resultbuttons
+for(var i=0; i < MAX_RESULT; i++) {
+        resultbuttons.push(new Resultbutton(350, 350 - i * 30, false));
+}
+
+mouseClicked = function() {
+    previousAnswer = "";
+    if(points === 10) {
+        points = 0;
+        newNumbers();
+    } else {
+        for (var i = 0; i < buttons.length; i++) {
+            if (buttons[i].isUnderMouse(mouseX, mouseY)) {
+                if (buttons[i].value === number1 * number2) {
+                    points++;
+                } else {
+                    points--;
+                    previousAnswer = " "+number1+" x "+number2+" = "+number1*number2;
+                }
+                points = constrain(points,0, MAX_RESULT);
+                newNumbers();
+            }
+        }
+    }
+};
+
+draw = function() {
+    background(255, 255, 255);
+    
+    // Draw buttons
+    for(var i=0; i < buttons.length; i++) {
+        buttons[i].draw();
+    }
+
+    // Draw resultbuttons
+    drawAllResultButtons(points);
+    
+    fill(0, 0, 0);
+    textSize(50);
+    textAlign(LEFT,CENTER);
+    text(number1 + " x " + number2 + " =  ", 30, 40);
+    if(points >= 10) {
+        fill(50, 171, 34);
+        text("BRAVO!",200, 40);
+    }
+    fill(245, 22, 48);
+    textSize(25);
+    text(previousAnswer, 250, 40);
+};
+
+//Start of program
+newNumbers();
+		
+}};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc);
+	 
+ </script>
+
+</html>
