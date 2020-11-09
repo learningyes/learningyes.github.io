@@ -131,17 +131,18 @@ draw = function() {
         resultbuttons[i].draw();
     }
     
-    fill(0, 0, 0);
     textSize(50);
-    text(number1 + " x " + number2 + " =  " + input[1] + input[0], 40, 55);
-    noFill();
-    rect(210, 10, 75, 55);
     if(points >= 10) {
         fill(50, 171, 34);
-        text("CONGRATS!",40,120);
+        text("CONGRATS!", 40, 55);
     } else if (!answer) {
         fill(245, 22, 48);
-        text(previousAnswer + " ?!?",290, 55);
+        text(previousAnswer + " ?!?", 290, 55);
+    } else {
+	 fill(0, 0, 0);
+	 text(number1 + " x " + number2 + " =  " + input[1] + input[0], 40, 55);
+	 noFill();
+         rect(210, 10, 75, 55);
     }
 };
 		
