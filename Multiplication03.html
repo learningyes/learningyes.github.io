@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<!-- This is based on DillingerLee's great template here:
+https://github.com/Team-Code/KA_Offline -->
+<html> 
+ <head>
+    <title>Multiplication 01</title> 
+</head>
+ <body>
+    <p align="center"> 
+	<!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+ <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+	 
+	
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(30);
+        
+        // ProgramCodeGoesHere
+
+// Multiplication 03
+
+// start with multiplication up to n=3 and increase after n correct answers in a row
+
+var maxFactor = 4;
+var factor1;
+var factor2;
+var answers = [];
+var buttons = [];
+var correctAnswers = 0;
+var previousAnswer = "";
+var BUTTONRADIUS = 15;
+
+var Button = function(x, y, value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+};
+
+Button.prototype.draw = function() {
+    fill(255, 255, 255);
+    strokeWeight(2);
+    ellipse(this.x, this.y, 2 * BUTTONRADIUS, 2 * BUTTONRADIUS);
+    fill(0, 0, 0);
+    textSize(12);
+    textAlign(CENTER, CENTER);
+    text(this.value, this.x, this.y);
+};
+
+Button.prototype.isUnderMouse = function(x, y) {
+    return (sq(x - this.x) + sq(y - this.y)) < sq(BUTTONRADIUS);
+};
+
+// Function setting 10 answers
+var newAnswers = function() {
+    for(var i=0; i < 10; i++) {
+		answers[i] = floor(random(1, maxFactor)) * floor(random(1, maxFactor));
+	}
+    factor1 = floor(random(1, maxFactor));    
+    factor2 = floor(random(1, maxFactor));
+    answers[floor(random(0, 10))] = factor1 * factor2;
+    // Prepare buttons
+    for(var i=0; i < answers.length; i++) {
+        buttons[i] = new Button(30 + i * 2.5 * BUTTONRADIUS, 100, answers[i]);
+    }
+};
+
+mouseClicked = function() {
+    previousAnswer = "";
+    for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].isUnderMouse(mouseX, mouseY)) {
+            if (buttons[i].value === factor1 * factor2) {
+                correctAnswers++;
+            } else {
+                correctAnswers--;
+                previousAnswer = " "+factor1+" x "+factor2+" = "+factor1*factor2;
+            }
+            newAnswers();
+        }
+    }
+    if(correctAnswers === maxFactor) {
+        correctAnswers = 0;
+        maxFactor++;
+    }
+};
+
+newAnswers();
+
+draw = function() {
+    background(255, 255, 255);
+    
+    // Draw buttons
+    for(var i=0; i < buttons.length; i++) {
+        buttons[i].draw();
+    }
+    // Write text
+    fill(0, 0, 0);
+    textSize(50);
+    textAlign(LEFT,CENTER);
+    text(factor1 + " x " + factor2 + " =  ", 30, 40);
+    textSize(25);
+    text("Max: " + (maxFactor-1), 30, 300);
+    fill(245, 22, 48);
+    text(previousAnswer, 250, 40);
+};
+		
+}};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc);
+	 
+ </script>
+
+</html>
