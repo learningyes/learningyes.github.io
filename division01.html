@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!-- This is based on DillingerLee's great template here:
+https://github.com/Team-Code/KA_Offline -->
+<html> 
+ <head>
+    <title>Multiplication 01</title> 
+</head>
+ <body>
+    <p align="center"> 
+	<!--This draws the Canvas on the webpage -->
+      <canvas id="mycanvas"></canvas> 
+    </p>
+ </body>
+ 
+ <!-- Run all the JavaScript stuff -->
+ <!-- Include the processing.js library -->
+ <!-- See https://khanacademy.zendesk.com/hc/en-us/articles/202260404-What-parts-of-ProcessingJS-does-Khan-Academy-support- for differences -->
+ <script src="https://cdn.jsdelivr.net/processing.js/1.4.8/processing.min.js"></script> 
+ 
+ <script>
+	 
+	
+    var sketchProc = function(processingInstance) {
+     with (processingInstance) {
+        size(400, 400); 
+        frameRate(30);
+        
+        // ProgramCodeGoesHere
+
+var MAX_RESULT = 10;
+var MAX_NUMBER = 10;
+var buttons = [];
+var answerbuttons = [];
+var number1;
+var number2;
+var points = 0;
+var previousAnswer;
+
+// Define buttons
+
+var Button = function(x, y, value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+};
+
+Button.prototype.draw = function() {
+    fill(255, 255, 255);
+    strokeWeight(2);
+    ellipse(this.x, this.y, 26, 26);
+    fill(0, 0, 0);
+    textSize(12);
+    textAlign(CENTER, CENTER);
+    text(this.value, this.x, this.y);
+};
+
+Button.prototype.isUnderMouse = function(x, y) {
+    return (sq(x - this.x) + sq(y - this.y)) < sq(13);
+};
+
+// Define answerbuttons
+
+var Answerbutton = function(x, y, value) {
+    this.x = x;
+    this.y = y;
+    this.value = value;
+};
+
+Answerbutton.prototype.draw = function() {
+    fill(197, 207, 124);
+    strokeWeight(2);
+    rect(this.x, this.y, 25, 25, 7);
+    fill(0, 0, 0);
+    textSize(12);
+    textAlign(CENTER, CENTER);
+    text(this.value, this.x+13, this.y+13);
+};
+
+Answerbutton.prototype.isUnderMouse = function(x, y) {
+    return (x>this.x && x<this.x+25 && y>this.y && y<this.y+25);
+};
+
+// Function setting random numbers to calculate
+var newNumbers = function() {
+    number1 = floor(random(1, MAX_NUMBER));    
+    number2 = floor(random(1, MAX_NUMBER));
+};
+
+// Prepare buttons
+for(var h=1; h <= MAX_NUMBER; h++) {
+    for(var v=1; v <= MAX_NUMBER; v++) {
+        buttons.push(new Button(h*30, 63 + v*30, h*v));
+    }
+}
+
+// Prepare answerbuttons
+for(var i=0; i < MAX_RESULT; i++) {
+        answerbuttons.push(new Answerbutton(350, 350 - i * 30, i+1));
+}
+
+mouseClicked = function() {
+    previousAnswer = "";
+    if(points === 10) {
+        points = 0;
+        newNumbers();
+    } else {
+        for (var i = 0; i < answerbuttons.length; i++) {
+            if (answerbuttons[i].isUnderMouse(mouseX, mouseY)) {
+                if (answerbuttons[i].value === number1) {
+                    points++;
+                } else {
+                    points--;
+                    previousAnswer = number1*number2+" / "+number2+" = "+number1;
+                }
+                points = constrain(points,0, MAX_RESULT);
+                newNumbers();
+            }
+        }
+    }
+};
+
+draw = function() {
+    background(255, 255, 255);
+    
+    // Draw buttons
+    for(var i=0; i < buttons.length; i++) {
+        buttons[i].draw();
+    }
+
+    // Draw answerbuttons
+    for(var i=0; i < answerbuttons.length; i++) {
+        answerbuttons[i].draw();
+    }
+    
+    fill(0, 0, 0);
+    textSize(50);
+    textAlign(LEFT,CENTER);
+    text(number1*number2 + " / " + number2 + " =  ", 30, 40);
+    textSize(20);
+    text(points,370,40);
+    if(points >= 10) {
+        fill(50, 171, 34);
+        textSize(50);
+        text("BRAVO!",195, 40);
+    }
+    fill(245, 22, 48);
+    textSize(25);
+    text(previousAnswer, 250, 40);
+};
+
+//Start of program
+newNumbers();
+
+		
+}};
+
+    // Get the canvas that Processing-js will use
+    var canvas = document.getElementById("mycanvas"); 
+    // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
+    var processingInstance = new Processing(canvas, sketchProc);
+	 
+ </script>
+
+</html>
