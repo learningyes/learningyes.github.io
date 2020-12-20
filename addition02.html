@@ -40,7 +40,7 @@ var creatureNumber;
 angleMode = "degrees";
 
 // Declare all creatures
-var faces = [
+/*var creatures = [
     getImage("avatars/leafers-sapling"),
     getImage("avatars/leafers-tree"),
     getImage("avatars/leafers-ultimate"),
@@ -49,7 +49,7 @@ var faces = [
     getImage("avatars/mr-pink"),
     getImage("avatars/old-spice-man"),
     getImage("avatars/robot_female_1")
-];
+];*/
 
 // Define buttons
 var Button = function(x, y, pressed) {
@@ -165,11 +165,11 @@ draw = function() {
     text("=", 187, 250);
     
     // Draw creature
-    if(points < 5) {
-        image(faces[creatureNumber], 385 - points * 15, 0);
+    /*if(points < 5) {
+        image(creatures[creatureNumber], 385 - points * 15, 0);
     } else {
-        image(faces[creatureNumber], 50, 40, 300, 300);
-    }
+        image(creatures[creatureNumber], 50, 40, 300, 300);
+    }*/
 };
 
 newNumbers();
