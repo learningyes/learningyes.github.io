@@ -3,7 +3,7 @@
 https://github.com/Team-Code/KA_Offline -->
 <html> 
  <head>
-    <title>Multiplication 01</title> 
+    <title>Division 01</title> 
 </head>
  <body>
     <p align="center"> 
@@ -133,16 +133,17 @@ draw = function() {
     }
     
     fill(0, 0, 0);
-    textSize(50);
     textAlign(LEFT,CENTER);
-    text(number1*number2 + " / " + number2 + " =  ", 30, 40);
-    textSize(20);
-    text(points,370,40);
-    if(points >= 10) {
+    if(points < 10) {
+    	textSize(50);
+        text(number1*number2 + " / " + number2 + " =  ", 30, 40);
+    } else {
         fill(50, 171, 34);
         textSize(50);
         text("BRAVO!",195, 40);
     }
+    textSize(20);
+    text(points,370,40);
     fill(245, 22, 48);
     textSize(25);
     text(previousAnswer, 250, 40);
