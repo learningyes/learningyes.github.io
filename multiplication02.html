@@ -3,7 +3,7 @@
 https://github.com/Team-Code/KA_Offline -->
 <html> 
  <head>
-    <title>Multiplication 01</title> 
+    <title>Multiplication 02</title> 
 </head>
  <body>
     <p align="center"> 
@@ -117,7 +117,9 @@ mouseClicked = function() {
                     previousAnswer = " "+number1+" x "+number2+" = "+number1*number2;
                 }
                 points = constrain(points,0, MAX_RESULT);
-                newNumbers();
+                if(points < 10) {
+		    newNumbers();
+		}
             }
         }
     }
