@@ -36,20 +36,7 @@ var points = 0;
 var number1 = 0;
 var number2 = 0;
 var MAX_NUMBER = 5;
-var creatureNumber;
 angleMode = "degrees";
-
-// Declare all creatures
-var creatures = [
-    getImage("avatars/leafers-sapling"),
-    getImage("avatars/leafers-tree"),
-    getImage("avatars/leafers-ultimate"),
-    getImage("avatars/marcimus"),
-    getImage("avatars/mr-pants"),
-    getImage("avatars/mr-pink"),
-    getImage("avatars/old-spice-man"),
-    getImage("avatars/robot_female_1")
-];
 
 // Define buttons
 var Button = function(x, y, pressed) {
@@ -139,7 +126,6 @@ mouseClicked = function() {
     } else {
         points = 0;
         newNumbers();
-        creatureNumber = floor(random(0, faces.length));
     }
 };
 
@@ -164,12 +150,16 @@ draw = function() {
     text("+", 87, 250);
     text("=", 187, 250);
     
-    // Draw creature
-    /*if(points < 5) {
-        image(creatures[creatureNumber], 385 - points * 15, 0);
+    // Draw resultbar
+    if(points < 5) {
+	fill(0, 100, 100);
+        rect(350, 350 - points * 40, 30, points * 40);
     } else {
-        image(creatures[creatureNumber], 50, 40, 300, 300);
-    }*/
+        fill(0, 100, 100);
+	textSize(100);
+	textAlign(CENTER, CENTER);
+	text("BRAVO!!!", 200, 200);
+    }
 };
 
 newNumbers();
