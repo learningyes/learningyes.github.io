@@ -132,16 +132,17 @@ draw = function() {
         answerbuttons[i].draw();
     }
     
-    fill(0, 0, 0);
     textAlign(LEFT,CENTER);
     if(points < 10) {
+	fill(0, 0, 0);
     	textSize(50);
         text(number1*number2 + " / " + number2 + " =  ", 30, 40);
     } else {
         fill(50, 171, 34);
         textSize(50);
-        text("BRAVO!",195, 40);
+        text("BRAVO!",170, 40);
     }
+    fill(0, 0, 0);
     textSize(20);
     text(points,370,40);
     fill(245, 22, 48);
