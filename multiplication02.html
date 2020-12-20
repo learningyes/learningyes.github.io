@@ -117,9 +117,7 @@ mouseClicked = function() {
                     previousAnswer = " "+number1+" x "+number2+" = "+number1*number2;
                 }
                 points = constrain(points,0, MAX_RESULT);
-                if(points < 10) {
-		    newNumbers();
-		}
+                newNumbers();
             }
         }
     }
@@ -139,10 +137,12 @@ draw = function() {
     fill(0, 0, 0);
     textSize(50);
     textAlign(LEFT,CENTER);
-    text(number1 + " x " + number2 + " =  ", 30, 40);
+    
     if(points >= 10) {
         fill(50, 171, 34);
         text("BRAVO!",200, 40);
+    } else {
+	 text(number1 + " x " + number2 + " =  ", 30, 40);
     }
     fill(245, 22, 48);
     textSize(25);
