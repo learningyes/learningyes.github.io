@@ -120,10 +120,12 @@ mouseClicked = function() {
                     points += 1;
 		    changeOfPoints = 1;
                 } else {
-                    points -= 1;
-		    changeOfPoints = -1;
+                    if(point > 0) {
+			points -= 1;
+		    	changeOfPoints = -1;
+		    }
                 }
-                points = constrain(points, 0, 5);
+                //points = constrain(points, 0, 5);
                 newNumbers();
             }
         }
@@ -167,13 +169,13 @@ draw = function() {
 	rect(350, 130, 30, 240);
 	fill(0, 100, 100);
 	rect(350, 370 - ((points-changeOfPoints) * 48), 30, (points-changeOfPoints) * 48);
-	changeOfPoints -= 0.01;
+	changeOfPoints -= 0.02;
     } else if(changeOfPoints < 0) {
 	fill(255, 255, 255);
 	rect(350, 130, 30, 240);
 	fill(0, 100, 100);
 	rect(350, 370 - ((points-changeOfPoints) * 48), 30, (points-changeOfPoints) * 48);
-	changeOfPoints += 0.01;
+	changeOfPoints += 0.02;
     }
     if(points === 5) {
         fill(0, floor(128 + 127 * sin(frameCount%360)), 0);
