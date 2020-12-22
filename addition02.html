@@ -33,6 +33,7 @@ var buttonsRow1 = [];
 var buttonsRow2 = [];	     
 var answerbuttons = [];
 var points = 0;
+var changeOfPoints;
 var number1 = 0;
 var number2 = 0;
 var MAX_NUMBER = 5;
@@ -111,13 +112,16 @@ for(var j=0; j < 2; j++) {
 
 // Function when mouse is clicked
 mouseClicked = function() {
+    changeOfPoints = 0;
     if(points < 5) {
         for (var i = 0; i < answerbuttons.length; i++) {
             if (answerbuttons[i].isUnderMouse(mouseX, mouseY)) {
                 if (answerbuttons[i].value === number1 + number2) {
                     points += 1;
+		    changeOfPoints = 1;
                 } else {
                     points -= 1;
+		    changeOfPoints = -1;
                 }
                 points = constrain(points, 0, 5);
                 newNumbers();
@@ -155,7 +159,7 @@ draw = function() {
     fill(255, 255, 255);
     rect(350, 130, 30, 240);
     fill(0, 100, 100);
-    rect(350, 370 - points * 50, 30, points * 48);
+    rect(350, 370 - points * 48, 30, points * 48);
     if(points === 5) {
         fill(0, floor(128 + 127 * sin(frameCount%360)), 0);
 	stroke(0, 0, 0);
