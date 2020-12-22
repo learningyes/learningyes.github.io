@@ -151,13 +151,12 @@ draw = function() {
     text("=", 187, 250);
     
     // Draw resultbar
-    if(points < 5) {
-	stroke(0, 0, 0);
-	fill(255, 255, 255);
-	rect(350, 130, 30, 240);
-	fill(0, 100, 100);
-        rect(350, 370 - points * 50, 30, points * 48);
-    } else {
+    stroke(0, 0, 0);
+    fill(255, 255, 255);
+    rect(350, 130, 30, 240);
+    fill(0, 100, 100);
+    rect(350, 370 - points * 50, 30, points * 48);
+    if(points === 5) {
         fill(0, floor(128 + 127 * sin(frameCount%360)), 0);
 	stroke(0, 0, 0);
 	textSize(80);
