@@ -33,7 +33,7 @@ var buttonsRow1 = [];
 var buttonsRow2 = [];	     
 var answerbuttons = [];
 var points = 0;
-var changeOfPoints;
+var changeOfPoints = 0;
 var number1 = 0;
 var number2 = 0;
 var MAX_NUMBER = 5;
@@ -163,14 +163,14 @@ draw = function() {
 	fill(0, 100, 100);    
     	rect(350, 370 - points * 48, 30, points * 48);
     } else if(changeOfPoints === 1) {
-	for(var i = 1; i < 49; i += 0.1) {
+	for(var i = 1; i < 49; i += 0.01) {
 	    fill(255, 255, 255);
 	    rect(350, 130, 30, 240);
 	    fill(0, 100, 100);
 	    rect(350, 370 - ((points-1) * 48 + i), 30, (points-1) * 48 + i);
 	}
     } else if(changeOfPoints === -1) {
-	for(var i = 1; i < 49; i += 0.1) {
+	for(var i = 1; i < 49; i += 0.01) {
 	    fill(255, 255, 255);
 	    rect(350, 130, 30, 240);
 	    fill(0, 100, 100);
