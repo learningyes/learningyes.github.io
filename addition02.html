@@ -159,7 +159,7 @@ draw = function() {
     // Draw resultbar
     stroke(0, 0, 0);
     
-    if(changeOfPoints === 0) {
+    if(changeOfPoints > -0.1 && changeOfPoints < 0.1) {
 	fill(255, 255, 255);
 	rect(350, 130, 30, 240);
 	fill(0, 100, 100);    
