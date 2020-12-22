@@ -156,17 +156,24 @@ draw = function() {
     
     // Draw resultbar
     stroke(0, 0, 0);
-    fill(255, 255, 255);
-    rect(350, 130, 30, 240);
-    fill(0, 100, 100);
+    
     if(changeOfPoints === 0) {
+	fill(255, 255, 255);
+	rect(350, 130, 30, 240);
+	fill(0, 100, 100);    
     	rect(350, 370 - points * 48, 30, points * 48);
     } else if(changeOfPoints === 1) {
-	for(var i = 1; i < 49; i++) {
+	for(var i = 1; i < 49; i += 0.1) {
+	    fill(255, 255, 255);
+	    rect(350, 130, 30, 240);
+	    fill(0, 100, 100);
 	    rect(350, 370 - ((points-1) * 48 + i), 30, (points-1) * 48 + i);
 	}
     } else if(changeOfPoints === -1) {
-	for(var i = 1; i < 49; i++) {
+	for(var i = 1; i < 49; i += 0.1) {
+	    fill(255, 255, 255);
+	    rect(350, 130, 30, 240);
+	    fill(0, 100, 100);
 	    rect(350, 370 - ((points+1) * 48 - i), 30, (points+1) * 48 - i);
 	}
     }
