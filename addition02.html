@@ -120,7 +120,7 @@ mouseClicked = function() {
                     points += 1;
 		    changeOfPoints = 1;
                 } else {
-                    if(point > 0) {
+                    if(points > 0) {
 			points -= 1;
 		    	changeOfPoints = -1;
 		    }
@@ -169,13 +169,13 @@ draw = function() {
 	rect(350, 130, 30, 240);
 	fill(0, 100, 100);
 	rect(350, 370 - ((points-changeOfPoints) * 48), 30, (points-changeOfPoints) * 48);
-	changeOfPoints -= 0.02;
+	changeOfPoints -= 0.1;
     } else if(changeOfPoints < 0) {
 	fill(255, 255, 255);
 	rect(350, 130, 30, 240);
 	fill(0, 100, 100);
 	rect(350, 370 - ((points-changeOfPoints) * 48), 30, (points-changeOfPoints) * 48);
-	changeOfPoints += 0.02;
+	changeOfPoints += 0.1;
     }
     if(points === 5) {
         fill(0, floor(128 + 127 * sin(frameCount%360)), 0);
