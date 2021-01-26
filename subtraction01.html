@@ -46,10 +46,10 @@ var Button = function(x, y, pressed) {
     this.pressed = pressed;
 };
 
-Button.prototype.draw = function() {
+Button.prototype.draw = function(brauness) {
     stroke(0, 0, 0);
-	if(this.pressed) {
-        fill(179, 134, 75);
+    if(this.pressed) {
+        fill(brauness, brauness, brauness);
     } else {
         fill(255, 255, 255);
     }
@@ -124,7 +124,7 @@ var newNumbers = function() {
     monsters.splice(0, monsters.length);
     // Make new buttons
     for(var i = 0; i < number1; i++) {
-        buttons.push(new Button(random(20, width - 20), random(20, height - 20), true));
+        buttons.push(new Button(random(20, width - 20), random(20, height - 20), false));
     }
     // Make new monsters
     for(var i = 0; i < number2; i++) {
@@ -186,7 +186,7 @@ draw = function() {
     
     // Draw buttons
     for(var i=0; i < buttons.length; i++) {
-        buttons[i].draw();
+        buttons[i].draw(floor(128 + 127 * sin(frameCount%300 / 10)));
     }
     
     // Draw text
