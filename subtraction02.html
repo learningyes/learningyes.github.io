@@ -10,6 +10,25 @@ https://github.com/Team-Code/KA_Offline -->
 	<!--This draws the Canvas on the webpage -->
       <canvas id="mycanvas"></canvas> 
     </p>
+	 
+	 // Prevent scrolling when touching the canvas
+	document.body.addEventListener("touchstart", function (e) {
+  	    if (e.target == canvas) {
+    		e.preventDefault();
+  	    }
+	}, false);
+	document.body.addEventListener("touchend", function (e) {
+  	    if (e.target == canvas) {
+    		e.preventDefault();
+  	    }
+	}, false);
+	document.body.addEventListener("touchmove", function (e) {
+  	    if (e.target == canvas) {
+    		e.preventDefault();
+  	    }
+	}, false);
+	// End of preventDefault on canvas
+	 
  </body>
  
  <!-- Run all the JavaScript stuff -->
@@ -196,23 +215,7 @@ draw = function() {
     // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
     var processingInstance = new Processing(canvas, sketchProc);
     
-	// Prevent scrolling when touching the canvas
-	document.body.addEventListener("touchstart", function (e) {
-  	    if (e.target == canvas) {
-    		e.preventDefault();
-  	    }
-	}, false);
-	document.body.addEventListener("touchend", function (e) {
-  	    if (e.target == canvas) {
-    		e.preventDefault();
-  	    }
-	}, false);
-	document.body.addEventListener("touchmove", function (e) {
-  	    if (e.target == canvas) {
-    		e.preventDefault();
-  	    }
-	}, false);
-	// End of preventDefault on canvas 
+	 
 	 
  </script>
 
