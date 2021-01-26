@@ -68,7 +68,7 @@ Monster.prototype.draw = function() {
     strokeWeight(2);
     fill(78, 186, 91);
 	if(this.hungry) {
-        arc(this.x, this.y, 40, 40, -135, 135);
+        arc(this.x, this.y, 40, 40, 0.8, 4.4);
         line(this.x, this.y, this.x - 14, this.y - 14);
         line(this.x, this.y, this.x - 14, this.y + 14);
     } else {
@@ -148,6 +148,7 @@ mouseDragged = function() {
     }
 };
 
+/*
 mouseClicked = function() {
     if(points === 1) {
         newNumbers();
@@ -161,7 +162,7 @@ mouseClicked = function() {
             }
         }
     }
-};
+};*/
 
 draw = function() {
     // Draw white bakground
@@ -202,6 +203,19 @@ draw = function() {
         for(var i=0; i < answerbuttons.length; i++) {
             answerbuttons[i].draw(floor(128 + 127 * sin(frameCount%1000 / 10)));
         }
+    }
+	
+    if(mouseIsPressed) {
+    	if(points === 1) {
+            newNumbers();
+            points = 0;
+    	} else if(monsters.length === 0) {
+            for (var i = 0; i < answerbuttons.length; i++) {
+            	if (answerbuttons[i].isUnderMouse(mouseX, mouseY) && answerbuttons[i].value === number1 - number2) {
+                    points = 1;
+		}
+	    }
+	}
     }
 };
 
