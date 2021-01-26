@@ -75,8 +75,8 @@ Monster.prototype.draw = function() {
     fill(78, 186, 91);
     if(this.hungry) {
         arc(this.x, this.y, 40, 40, 0.8, 5.4);
-        line(this.x, this.y, this.x - 14, this.y - 14);
-        line(this.x, this.y, this.x - 14, this.y + 14);
+        line(this.x, this.y, this.x + 14, this.y - 14);
+        line(this.x, this.y, this.x + 14, this.y + 14);
     } else {
         ellipse(this.x, this.y, 40, 40);
     }
