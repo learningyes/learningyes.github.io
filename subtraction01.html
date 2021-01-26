@@ -134,7 +134,7 @@ var newNumbers = function() {
 
 // Initiate first numbers to calculate, buttons and monsters
 newNumbers();
-
+/*
 mouseDragged = function() {
     for (var i = buttons.length-1; i >= 0; i--) {
         if (buttons[i].isUnderMouse(mouseX, mouseY)) {
@@ -168,7 +168,7 @@ mouseClicked = function() {
         }
     }
 };
-
+*/
 draw = function() {
     // Draw white bakground
     background(255, 255, 255);
@@ -207,6 +207,37 @@ draw = function() {
         // Draw answerbuttons
         for(var i=0; i < answerbuttons.length; i++) {
             answerbuttons[i].draw(floor(128 + 127 * sin(frameCount%3600 / 10)));
+        }
+    }
+	
+    if(mouseIsPressed) {
+        for (var i = buttons.length-1; i >= 0; i--) {
+            if (buttons[i].isUnderMouse(mouseX, mouseY)) {
+                buttons[i].x = mouseX;
+                buttons[i].y = mouseY;
+                // Keep button inside canvas
+                buttons[i].x = constrain(buttons[i].x, 20, width - 20);
+                buttons[i].y = constrain(buttons[i].y, 20, height - 20);
+                // Check if button is over monster
+                for (var j = 0; j < monsters.length; j++) {
+                    if (monsters[j].isUnderMouse(mouseX, mouseY) && monsters[j].hungry) {
+                        monsters[j].hungry = false;
+                        buttons.splice(i, 1);
+                    }
+                }
+            }
+        }
+        if(points === 1) {
+            newNumbers();
+            points = 0;
+        } else if(monsters.length === 0) {
+            for (var i = 0; i < answerbuttons.length; i++) {
+                if (answerbuttons[i].isUnderMouse(mouseX, mouseY)) {
+                    if (answerbuttons[i].value === number1 - number2) {
+                        points = 1;
+                    }
+                }
+            }
         }
     }
 };
