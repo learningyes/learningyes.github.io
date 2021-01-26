@@ -22,7 +22,7 @@ https://github.com/Team-Code/KA_Offline -->
 	
     var sketchProc = function(processingInstance) {
      with (processingInstance) {
-        size(400, 400); 
+        size(500, 500); 
         frameRate(30);
         
         // ProgramCodeGoesHere
@@ -36,7 +36,7 @@ var points = 0;
 var number1 = 0;
 var number2 = 0;
 var MAX_NUMBER = 10;
-angleMode = "degrees";
+//angleMode = "degrees";
 ellipseMode(CENTER);
 
 // Define buttons
@@ -74,7 +74,7 @@ Monster.prototype.draw = function() {
     strokeWeight(2);
     fill(78, 186, 91);
     if(this.hungry) {
-        arc(this.x, this.y, 40, 40, 45, 315);
+        arc(this.x, this.y, 40, 40, 0.8, 5.4);
         line(this.x, this.y, this.x - 14, this.y - 14);
         line(this.x, this.y, this.x - 14, this.y + 14);
     } else {
@@ -195,7 +195,7 @@ draw = function() {
     textAlign(LEFT, CENTER);
     if (points === 0) {
         fill(0, 0, 0);
-        text(number1 + " - " + number2 + " =", 40, 40);
+        text(number1 + " – " + number2 + " =", 40, 40);
     } else {
         fill(0, 0, 0);
         text(number1 + " – " + number2 + " = " + (number1-number2), 40, 40);
