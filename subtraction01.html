@@ -139,7 +139,7 @@ mouseClicked = function() {
     for (var i = buttons.length-1; i >= 0; i--) {
 	if(buttons[i].pressed === true) {
 	    buttons[i].x = mouseX;
-	    buttons[i].y = mouseY;
+	    buttons[i].y = mouseY + i * 5;
 	    buttons[i].pressed = false;
 	    for (var j = 0; j < monsters.length; j++) {
                 if (monsters[j].isUnderMouse(mouseX, mouseY) && monsters[j].hungry) {
