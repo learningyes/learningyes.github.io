@@ -73,8 +73,8 @@ Monster.prototype.draw = function() {
     stroke(0, 0, 0);
     strokeWeight(2);
     fill(78, 186, 91);
-	if(this.hungry) {
-        arc(this.x, this.y, 40, 40, -135, 135);
+    if(this.hungry) {
+        arc(this.x, this.y, 40, 40, 45, 315);
         line(this.x, this.y, this.x - 14, this.y - 14);
         line(this.x, this.y, this.x - 14, this.y + 14);
     } else {
@@ -199,7 +199,7 @@ draw = function() {
     } else {
         fill(0, 0, 0);
         text(number1 + " – " + number2 + " = " + (number1-number2), 40, 40);
-        fill(0, floor(128 + 127 * sin(frameCount%1200 / 10)), 100);
+        fill(0, floor(128 + 127 * sin(frameCount%600 / 10)), 100);
         text("BRAVO!", 40, 180);
     }
     
