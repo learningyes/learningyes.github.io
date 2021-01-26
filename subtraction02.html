@@ -60,7 +60,7 @@ var Monster = function(x, y, hungry) {
     this.x = x;
     this.y = y;
     this.hungry = hungry;
-    this.timeLeft = 100;
+    this.timeLeft = 30;
 };
 
 Monster.prototype.draw = function() {
@@ -161,7 +161,6 @@ mouseClicked = function() {
             }
         }
     }
-    
 };
 
 draw = function() {
@@ -189,11 +188,11 @@ draw = function() {
     textAlign(LEFT, CENTER);
     if (points === 0) {
         fill(0, 0, 0);
-        text(number1 + " - " + number2 + " =", 40, 40);
+        text(number1 + " – " + number2 + " =", 40, 40);
     } else {
         fill(0, 0, 0);
         text(number1 + " – " + number2 + " = " + (number1-number2), 40, 40);
-        fill(0, floor(128 + 127 * sin(frameCount%1200 / 10)), 100);
+        fill(0, floor(128 + 127 * sin(frameCount%400 / 10)), 100);
         text("BRAVO!", 40, 180);
     }
     
@@ -201,7 +200,7 @@ draw = function() {
     if(monsters.length === 0) {
         // Draw answerbuttons
         for(var i=0; i < answerbuttons.length; i++) {
-            answerbuttons[i].draw(floor(128 + 127 * sin(frameCount%3600 / 10)));
+            answerbuttons[i].draw(floor(128 + 127 * sin(frameCount%1000 / 10)));
         }
     }
 };
