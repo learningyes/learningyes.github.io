@@ -195,6 +195,24 @@ draw = function() {
     var canvas = document.getElementById("mycanvas"); 
     // Pass the function sketchProc (defined in myCode.js) to Processing's constructor.
     var processingInstance = new Processing(canvas, sketchProc);
+    
+	// Prevent scrolling when touching the canvas
+	document.body.addEventListener("touchstart", function (e) {
+  	    if (e.target == canvas) {
+    		e.preventDefault();
+  	    }
+	}, false);
+	document.body.addEventListener("touchend", function (e) {
+  	    if (e.target == canvas) {
+    		e.preventDefault();
+  	    }
+	}, false);
+	document.body.addEventListener("touchmove", function (e) {
+  	    if (e.target == canvas) {
+    		e.preventDefault();
+  	    }
+	}, false);
+	// End of preventDefault on canvas 
 	 
  </script>
 
