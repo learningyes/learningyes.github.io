@@ -135,7 +135,7 @@ var newNumbers = function() {
 // Initiate first numbers to calculate, buttons and monsters
 newNumbers();
 
-mouseDragged = function() {
+touchMoved = function() {
     for (var i = buttons.length-1; i >= 0; i--) {
         if (buttons[i].isUnderMouse(mouseX, mouseY)) {
             buttons[i].x = mouseX;
@@ -154,7 +154,7 @@ mouseDragged = function() {
     }
 };
 
-mouseClicked = function() {
+touchStarted = function() {
     if(points === 1) {
         newNumbers();
         points = 0;
