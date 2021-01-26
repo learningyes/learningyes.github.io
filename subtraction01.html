@@ -137,21 +137,23 @@ newNumbers();
 
 mouseClicked = function() {
     for (var i = buttons.length-1; i >= 0; i--) {
-        if (buttons[i].isUnderMouse(mouseX, mouseY)) {
-	    buttons[i].pressed = true;
-            //buttons[i].x = mouseX;
-            //buttons[i].y = mouseY;
-            // Keep button inside canvas
-            //buttons[i].x = constrain(buttons[i].x, 10, width - 10);
-            //buttons[i].y = constrain(buttons[i].y, 10, height - 10);
-            // Check if button is over monster
-            for (var j = 0; j < monsters.length; j++) {
+	if(buttons[i].pressed === true) {
+	    buttons[i].x = mouseX;
+	    buttons[i].y = mouseY;
+	    buttons[i].pressed = false;
+	    for (var j = 0; j < monsters.length; j++) {
                 if (monsters[j].isUnderMouse(mouseX, mouseY) && monsters[j].hungry) {
                     monsters[j].hungry = false;
                     buttons.splice(i, 1);
                 }
             }
-        }
+	} else if(buttons[i].isUnderMouse(mouseX, mouseY)) {
+	    buttons[i].pressed = true;
+            // Keep button inside canvas
+            //buttons[i].x = constrain(buttons[i].x, 10, width - 10);
+            //buttons[i].y = constrain(buttons[i].y, 10, height - 10);
+            // Check if button is over monster
+	}
     }
     if(points === 1) {
         newNumbers();
