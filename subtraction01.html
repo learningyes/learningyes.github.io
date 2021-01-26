@@ -51,7 +51,7 @@ Button.prototype.draw = function(brauness) {
     if(this.pressed) {
         fill(brauness, brauness, brauness);
     } else {
-        fill(255, 255, 255);
+        fill(179, 134, 75);
     }
     strokeWeight(2);
     ellipse(this.x, this.y, 40, 40);
@@ -135,14 +135,15 @@ var newNumbers = function() {
 // Initiate first numbers to calculate, buttons and monsters
 newNumbers();
 
-mouseDragged = function() {
+mouseClicked = function() {
     for (var i = buttons.length-1; i >= 0; i--) {
         if (buttons[i].isUnderMouse(mouseX, mouseY)) {
-            buttons[i].x = mouseX;
-            buttons[i].y = mouseY;
+	    buttons[i].pressed = true;
+            //buttons[i].x = mouseX;
+            //buttons[i].y = mouseY;
             // Keep button inside canvas
-            buttons[i].x = constrain(buttons[i].x, 10, width - 10);
-            buttons[i].y = constrain(buttons[i].y, 10, height - 10);
+            //buttons[i].x = constrain(buttons[i].x, 10, width - 10);
+            //buttons[i].y = constrain(buttons[i].y, 10, height - 10);
             // Check if button is over monster
             for (var j = 0; j < monsters.length; j++) {
                 if (monsters[j].isUnderMouse(mouseX, mouseY) && monsters[j].hungry) {
@@ -152,9 +153,6 @@ mouseDragged = function() {
             }
         }
     }
-};
-
-mouseClicked = function() {
     if(points === 1) {
         newNumbers();
         points = 0;
