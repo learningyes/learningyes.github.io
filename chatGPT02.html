@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pop the Balloons!</title>
+    <style>
+      /* Style for the body */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+      }
+      
+      /* Style for the balloons */
+      .balloon {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-color: #ff5c5c;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
+      
+      /* Style for the counter */
+      .counter {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
+      /* Style for the countdown */
+      .countdown {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      
+      /* Style for the start button */
+      .start-button {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+      }
+      
+      /* Style for the disabled start button */
+      .start-button[disabled] {
+        background-color: #999999;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Counter for popped balloons -->
+    <div class="counter">Popped balloons: <span id="pop-count">0</span></div>
+    
+    <!-- Countdown timer -->
+    <div class="countdown">Time left: <span id="countdown-timer">5</span>s</div>
+    
+    <!-- Start button -->
+    <button class="start-button" id="start-button">Start</button>
+    
+    <!-- Balloons -->
+    <script>
+      // Select the body element
+      const body = document.body;
+      
+      // Function to create a balloon element with a random position
+      function createBalloon() {
+        // Create a new balloon element
+        const balloon = document.createElement("div");
+        balloon.classList.add("balloon");
+        
+        // Set a random position for the balloon
+        const x = Math.floor(Math.random() * (window.innerWidth - 50));
+        const y = Math.floor(Math.random() * (window.innerHeight - 50));
+        balloon.style.left = x + "px";
+        balloon.style.top = y + "px";
+        
+        // Add a click event listener to the balloon
+        balloon.addEventListener("click", () => {
+          // Remove the balloon from the DOM
+          balloon.remove();
+          
+          // Increment the popped balloon counter
+          const popCount = document.getElementById("pop-count");
+          popCount.innerText = parseInt(popCount.innerText) + 1;
+        });
+        
+        // Return the balloon element
+        return balloon;
+      }
+      
+      // Function to create 10 balloons
+      function createBalloons() {
+        // Create 10 balloon elements and add them to the body
+        for (let i = 0; i < 10; i++) {
+          const balloon = createBalloon();
+          body.appendChild(balloon);
+    }
+  }
+  
+  // Countdown timer
+  let countdown = 5;
+  const countdownTimer = document.getElementById("countdown-timer");
+  
+  function startCountdown() {
+    const countdownInterval = setInterval(() => {
+      countdown--;
+      countdownTimer.innerText = countdown;
+      
+      if (countdown <= 0) {
+        clearInterval(countdownInterval);
+        body.removeEventListener("mousemove", mouseMoveListener);
+        startButton.removeAttribute("disabled");
+      }
+    }, 1000);
+  }
+  
+  // Mouse move event listener
+  let poppedBalloons = 0;
+  const popCount = document.getElementById("pop-count");
+  
+  function mouseMoveListener(event) {
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
+    const balloons = document.getElementsByClassName("balloon");
+    
+    for (let i = 0; i < balloons.length; i++) {
+      const balloon = balloons[i];
+      const balloonX = parseInt(balloon.style.left) + 25;
+      const balloonY = parseInt(balloon.style.top) + 25;
+      const distance = Math.sqrt(Math.pow(mouseX - balloonX, 2) + Math.pow(mouseY - balloonY, 2));
+      
+      if (distance < 25) {
+        balloon.click();
+      }
+    }
+  }
+  
+  // Start button event listener
+  const startButton = document.getElementById("start-button");
+  startButton.addEventListener("click", () => {
+    startButton.setAttribute("disabled", "");
+    poppedBalloons = 0;
+    popCount.innerText = poppedBalloons;
+    countdown = 5;
+    countdownTimer.innerText = countdown;
+    createBalloons();
+    body.addEventListener("mousemove", mouseMoveListener);
+    startCountdown();
+  });
+</script>
