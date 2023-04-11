@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GABI</title>
+    <title>FILIP</title>
     <style>
       /* Center text horizontally and vertically */
       body {
@@ -21,7 +21,7 @@
     </style>
   </head>
   <body>
-    <h1 id="logo"><span>G</span><span>A</span><span>B</span><span>I</span></h1>
+    <h1 id="logo"><span>F</span><span>I</span><span>L</span><span>I</span><span>P</span></h1>
     <script>
       // Array of colors to cycle through
       const colors = ["blue", "pink"];
@@ -38,13 +38,13 @@
         colorIndex = (colorIndex + 1) % colors.length;
       });
       
-      // Cycle through colors every 1 second
+      // Cycle through colors every 3 seconds
       setInterval(() => {
         logo.querySelectorAll("span").forEach((letter) => {
           letter.style.color = colors[colorIndex];
           colorIndex = (colorIndex + 1) % colors.length;
         });
-      }, 5000);
+      }, 3000);
     </script>
   </body>
 </html>
