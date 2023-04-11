@@ -14,10 +14,23 @@
       
       /* Style for text */
       h1 {
-        font-size: 8em;
+        font-size: 6em;
         font-weight: bold;
         color: pink;
         text-shadow: 1px 1px #fff;
+        
+        /* Animation */
+        animation-name: move-up-down;
+        animation-duration: 2s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+      }
+      
+      /* Keyframes for animation */
+      @keyframes move-up-down {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+        100% { transform: translateY(0); }
       }
     </style>
   </head>
