@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fox and Rabbits</title>
+	<style>
+		canvas {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="myCanvas" width="500" height="500"></canvas>
+
+	<script>
+		// Initialize canvas and context
+		var canvas = document.getElementById("myCanvas");
+		var ctx = canvas.getContext("2d");
+
+		// Initialize images
+		var foxImage = new Image();
+		foxImage.src = "fox.png";
+		var rabbitImage = new Image();
+		rabbitImage.src = "rabbit.png";
+
+		// Initialize variables
+		var foxX = 50;
+		var foxY = 50;
+		var rabbitX = [];
+		var rabbitY = [];
+		var rabbitAlive = [];
+		var numRabbits = 10;
+		var rabbitWidth = 50;
+		var rabbitHeight = 50;
+		var foxWidth = 80;
+		var foxHeight = 60;
+		var speed = 3;
+
+		// Initialize rabbits
+		for (var i = 0; i < numRabbits; i++) {
+			rabbitX.push(Math.floor(Math.random() * (canvas.width - rabbitWidth)));
+			rabbitY.push(Math.floor(Math.random() * (canvas.height - rabbitHeight)));
+			rabbitAlive.push(true);
+		}
+
+		// Draw fox and rabbits
+		function draw() {
+			// Clear canvas
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			// Draw fox
+			ctx.drawImage(foxImage, foxX, foxY, foxWidth, foxHeight);
+
+			// Draw rabbits
+			for (var i = 0; i < numRabbits; i++) {
+				if (rabbitAlive[i]) {
+					ctx.drawImage(rabbitImage, rabbitX[i], rabbitY[i], rabbitWidth, rabbitHeight);
+				}
+			}
+
+			// Move fox towards nearest rabbit
+			var nearestRabbit = -1;
+			var nearestDistance = Infinity;
+			for (var i = 0; i < numRabbits; i++) {
+				if (rabbitAlive[i]) {
+					var distance = Math.sqrt(Math.pow(foxX - rabbitX[i], 2) + Math.pow(foxY - rabbitY[i], 2));
+					if (distance < nearestDistance) {
+						nearestRabbit = i;
+						nearestDistance = distance;
+					}
+				}
+			}
+			if (nearestRabbit != -1) {
+				var dx = (rabbitX[nearestRabbit] - foxX) / nearestDistance;
+				var dy = (rabbitY[nearestRabbit] - foxY) / nearestDistance;
+				foxX += dx * speed;
+				foxY += dy * speed;
+			}
+
+			// Check for collisions
+			for (var i = 0; i < numRabbits; i++) {
+				if (rabbitAlive[i]) {
+					var dx = rabbitX[i] - foxX;
+					var dy = rabbitY[i] - foxY;
+					var distance = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+					if (distance < foxWidth / 2 + rabbitWidth / 2) {
+						rabbitAlive[i] = false;
+					}
+				}
+			}
+
+			// Check if all rabbits are gone
+			var allRabbitsGone = true;
+			for (var i = 0; i < rabbits.length; i++) {
+			if (rabbits[i].alive) {
+				allRabbitsGone = false;
+				break;
+			}
+		}
+		
+		// If all the rabbits are gone, stop the animation
+		if (allRabbitsGone) {
+			cancelAnimationFrame(animationId);
+			alert("Game over! All the rabbits are gone.");
+		} else {
+			// Otherwise, keep animating
+			animationId = requestAnimationFrame(animate);
+		}
+	}
+	
+	// Start the animation
+	animationId = requestAnimationFrame(animate);
+	</script>
+</body>
+</html>
