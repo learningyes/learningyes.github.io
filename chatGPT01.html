@@ -17,47 +17,34 @@
         font-size: 6em;
         font-weight: bold;
         text-shadow: 1px 1px #fff;
-        
-        /* Animation */
-        animation-name: color-cycle;
-        animation-duration: 10s;
-        animation-timing-function: linear;
-        animation-iteration-count: infinite;
-      }
-      
-      /* Keyframes for animation */
-      @keyframes color-cycle {
-        0% { color: blue; }
-        20% { color: pink; }
-        40% { color: pink; }
-        60% { color: blue; }
-        80% { color: blue; }
-        100% { color: pink; }
-      }
-      
-      /* Different colors for each letter */
-      h1 span:nth-child(1) {
-        color: blue;
-      }
-      
-      h1 span:nth-child(2) {
-        color: pink;
-      }
-      
-      h1 span:nth-child(3) {
-        color: blue;
-      }
-      
-      h1 span:nth-child(4) {
-        color: pink;
-      }
-      
-      h1 span:nth-child(5) {
-        color: pink;
       }
     </style>
   </head>
   <body>
-    <h1><span>G</span><span>A</span><span>B</span><span>I</span></h1>
+    <h1 id="logo"><span>G</span><span>A</span><span>B</span><span>I</span></h1>
+    <script>
+      // Array of colors to cycle through
+      const colors = ["blue", "pink"];
+      
+      // Index of current color
+      let colorIndex = 0;
+      
+      // Select the logo element
+      const logo = document.getElementById("logo");
+      
+      // Set the initial color of each letter
+      logo.querySelectorAll("span").forEach((letter) => {
+        letter.style.color = colors[colorIndex];
+        colorIndex = (colorIndex + 1) % colors.length;
+      });
+      
+      // Cycle through colors every 1 second
+      setInterval(() => {
+        logo.querySelectorAll("span").forEach((letter) => {
+          letter.style.color = colors[colorIndex];
+          colorIndex = (colorIndex + 1) % colors.length;
+        });
+      }, 1000);
+    </script>
   </body>
 </html>
